@@ -1,0 +1,2 @@
+to check git -a -m"xyz" command
+this will skip sag area
