@@ -1,0 +1,25 @@
+name: Terraform Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        run: |
+          echo "TF_CLOUD_USER=${{ secrets.TF_VAR_tf_cloud_user }}" >> $GITHUB_ENV
+          echo "TF_CLOUD_TOKEN=${{ secrets.TF_VAR_tf_cloud_token }}" >> $GITHUB_ENV
+          terraform init -input=false
+        env:
+          TF_IN_AUTOMATION: "true"
+
+      - name: Terraform Plan
+
